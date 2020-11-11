@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>图像识别+小程序云端开发 | 妮妮碎碎念</title>
+  <meta name="description" content="注册小程序个人账号，获取appid https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;  微信开发者工具新建项目，后端服务选择小程序云开发  初始化后，会提示 Error: invalid scope 没有权限，请先开通云服务 这时候需要点击左侧 云开发，开通云开发。首次开通云环境后，需等待大约 10 分钟方可正常使用云 API，在此期间官方后台服务正在做准备服务，在项目结构目录中cloudfu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图像识别+小程序云端开发">
+<meta property="og:url" content="https://xxn-my.github.io/2020/11/11/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB+%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E7%AB%AF%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="注册小程序个人账号，获取appid https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;  微信开发者工具新建项目，后端服务选择小程序云开发  初始化后，会提示 Error: invalid scope 没有权限，请先开通云服务 这时候需要点击左侧 云开发，开通云开发。首次开通云环境后，需等待大约 10 分钟方可正常使用云 API，在此期间官方后台服务正在做准备服务，在项目结构目录中cloudfu">
+<meta property="og:locale" content="zh">
+<meta property="article:published_time" content="2020-11-11T08:04:08.109Z">
+<meta property="article:modified_time" content="2020-11-11T08:04:08.245Z">
+<meta property="article:author" content="xxn">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://xxn-my.github.io/2020/11/11/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB+%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E7%AB%AF%E5%BC%80%E5%8F%91/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/xxn-my" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">扫眉</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">前端开发</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Fuzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/xxn-my" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>来来来跟我唠嗑!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+
+    
+      
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/11/11/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB+%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E7%AB%AF%E5%BC%80%E5%8F%91/" class="title">图像识别+小程序云端开发</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-11-11T08:04:08.109Z" itemprop="datePublished">2020-11-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/10/28/gatsby%E6%90%AD%E5%BB%BA%E4%BC%81%E4%B8%9A%E7%AB%99-%E6%80%BB%E7%BB%93%E7%AF%87/" class="title">gatsby搭建企业站-总结篇</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-10-28T06:50:23.263Z" itemprop="datePublished">2020-10-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/10/22/%E5%BB%BA%E7%AB%8Bgitlab-CI-CD%E6%B5%81%E6%B0%B4%E7%BA%BF/" class="title">建立CI/CD流水线</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-10-22T08:22:26.000Z" itemprop="datePublished">2020-10-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/10/22/gatsby%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/" class="title">gatsby与对象存储</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-10-22T06:59:22.000Z" itemprop="datePublished">2020-10-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/10/22/%E5%B0%9D%E8%AF%95%E5%B0%81%E8%A3%85%E8%A1%A8%E6%A0%BC%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6/" class="title">使用antd的upload上传组件，将上传的excel数据转换成JSON对象</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-10-22T06:49:53.000Z" itemprop="datePublished">2020-10-22</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-图像识别+小程序云端开发" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      图像识别+小程序云端开发
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/11/11/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB+%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E7%AB%AF%E5%BC%80%E5%8F%91/" class="article-date">
+	  <time datetime="2020-11-11T08:04:08.109Z" itemprop="datePublished">2020-11-11</time>
+	</a>
+</span>
+        
+        
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/11/11/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB+%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E7%AB%AF%E5%BC%80%E5%8F%91/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <ol>
+<li><p>注册小程序个人账号，获取appid</p>
+<p><a href="https://mp.weixin.qq.com/" target="_blank" rel="noopener">https://mp.weixin.qq.com/</a></p>
+</li>
+<li><p>微信开发者工具新建项目，后端服务选择<strong>小程序云开发</strong></p>
+<ul>
+<li><p>初始化后，会提示</p>
+<p><code>Error: invalid scope</code> 没有权限，请先开通云服务</p>
+<p>这时候需要点击左侧 <strong>云开发</strong>，开通云开发。首次开通云环境后，需等待大约 10 分钟方可正常使用云 API，在此期间官方后台服务正在做准备服务，在项目结构目录中<code>cloudfunctions</code>后会接上你的云开发环境名称即可视为成功</p>
+</li>
+<li><p>若提示</p>
+<p><code>cloud init error: Error: socket hang up</code>可无视，可能是网速过慢，刷新重新进入即可</p>
+</li>
+</ul>
+</li>
+<li><p>简单构建页面，可选择拍摄上传图片/本地相册上传图片</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"title-container"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">text</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>猜猜我是个啥<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"btns"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn"</span>  <span class="attr">data-Index</span>=<span class="string">"0"</span> <span class="attr">bindtap</span>=<span class="string">"doUpload"</span>&gt;</span></span><br><span class="line">      拍摄</span><br><span class="line">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn"</span> <span class="attr">data-Index</span>=<span class="string">"1"</span> <span class="attr">bindtap</span>=<span class="string">"doUpload"</span>&gt;</span></span><br><span class="line">      本地相册</span><br><span class="line">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>wx.chooseImage</code>进行图片选择，<code>wx.cloud.uploadFile</code>进行图片上传至云存储</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">wx.chooseImage(&#123;</span><br><span class="line">      count:<span class="number">1</span>,</span><br><span class="line">      sizeType: [<span class="string">'original'</span>,<span class="string">'compressed'</span>],</span><br><span class="line">      sourceType: [sourceType],</span><br><span class="line">      success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res)</span><br><span class="line">        <span class="keyword">let</span> filePath = res.tempFilePaths[<span class="number">0</span>];</span><br><span class="line">          <span class="comment">// animal为云开发 存储 中 新建的文件夹名称</span></span><br><span class="line">        <span class="keyword">const</span> cloudPath = <span class="string">`animal/<span class="subst">$&#123;<span class="built_in">Date</span>.now()&#125;</span><span class="subst">$&#123;filePath.match(<span class="regexp">/\.[^.]+?$/</span>)&#125;</span>`</span></span><br><span class="line">        <span class="built_in">console</span>.log(cloudPath);</span><br><span class="line">        wx.cloud.uploadFile(&#123;</span><br><span class="line">          cloudPath,</span><br><span class="line">          filePath,</span><br><span class="line">          success:<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(res)</span><br><span class="line">            wx.navigateTo(&#123;</span><br><span class="line">              url: <span class="string">`../detail/detail?pic=<span class="subst">$&#123;filePath&#125;</span>&amp;&amp;fileID=<span class="subst">$&#123;res.fileID&#125;</span>`</span></span><br><span class="line">            &#125;)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="5">
+<li><p>新建node.js云函数</p>
+<p>在cloudfunctions下新建一个云函数（注意命名必须唯一）,修改index.js</p>
+<ul>
+<li><p>引入云函数入口文件</p>
+<p><code>const cloud = require(&quot;wx-server-sdk&quot;);</code></p>
+</li>
+<li><p>引入<code>baidu-aip-sdk</code>，（使用前先进入此云函数所在目录安装这个包，此处已安装好）</p>
+<p><code>var AipImageClassifyClient = require(&quot;baidu-aip-sdk&quot;).imageClassify;</code></p>
+</li>
+<li><p>设置APPID/AK/SK</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> APP_ID = <span class="string">"your APP_ID"</span>;</span><br><span class="line"><span class="keyword">var</span> API_KEY = <span class="string">"your API_KEY"</span>;</span><br><span class="line"><span class="keyword">var</span> SECRET_KEY = <span class="string">"your SECRET_KEY"</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建一个对象，建议只保存一个对象调用服务接口,并初始化cloud</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> client = <span class="keyword">new</span> AipImageClassifyClient(APP_ID, API_KEY, SECRET_KEY);</span><br><span class="line"></span><br><span class="line">cloud.init();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写云函数入口函数，使用<code>cloud.downloadFile</code>下载图片，下载后转为base64，进而使用<code>client.animalDetect</code>进行图像识别，并将结果返回（附加百科词条）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">exports.main = <span class="keyword">async</span> (event, context) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; fileID &#125; = event;</span><br><span class="line">  <span class="comment">//通过fileID取这张图片</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> cloud.downloadFile(&#123;</span><br><span class="line">    fileID: fileID</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> buffer = res.fileContent;</span><br><span class="line">  <span class="keyword">let</span> image = buffer.toString(<span class="string">"base64"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> info = <span class="keyword">await</span> client.animalDetect(image,&#123;<span class="attr">baike_num</span>:<span class="number">5</span>&#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    info</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>注意：写好的云函数记得右击上传并部署</strong></p>
+<ol start="6">
+<li><p>识别结果页面</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:if</span>=<span class="string">"&#123;&#123;imgUrl&#125;&#125;"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">image</span> <span class="attr">src</span>=<span class="string">"&#123;&#123;imgUrl&#125;&#125;"</span> <span class="attr">mode</span>=<span class="string">"aspectFit"</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"title-container"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>识别结果<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">"&#123;&#123;result&#125;&#125;"</span> <span class="attr">class</span>=<span class="string">"list"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"list-name"</span>&gt;</span>&#123;&#123;index+1&#125;&#125;.&#123;&#123;item.name&#125;&#125;（&#123;&#123;item.score&#125;&#125;）<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"list-baike"</span>&gt;</span>百科信息：&#123;&#123;item.baike_info.description || '暂无'&#125;&#125;<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>识别页面的入口函数</p>
+<p>在文件中使用<code>wx.cloud.callFunction</code>调用云函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">onLoad: <span class="function"><span class="keyword">function</span> (<span class="params">options</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> &#123; pic, fileID &#125; = options;</span><br><span class="line">    <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">      imgUrl:pic</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    wx.cloud.callFunction(&#123;</span><br><span class="line">      name:<span class="string">"baidu2"</span>,</span><br><span class="line">      data:&#123;</span><br><span class="line">        fileID: fileID</span><br><span class="line">      &#125;,</span><br><span class="line">      success:<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res,<span class="string">"baidu"</span>)</span><br><span class="line">        <span class="keyword">const</span> &#123;<span class="attr">result</span>:&#123;<span class="attr">info</span>:&#123;result&#125;&#125;&#125; = res</span><br><span class="line">        <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">          result:result</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://xxn-my.github.io/2020/11/11/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB+%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E7%AB%AF%E5%BC%80%E5%8F%91/" title="图像识别+小程序云端开发" target="_blank" rel="external">https://xxn-my.github.io/2020/11/11/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB+%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E7%AB%AF%E5%BC%80%E5%8F%91/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xxn-my" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xxn-my" target="_blank"><span class="text-dark">扫眉</span><small class="ml-1x">前端开发</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2020/10/28/gatsby%E6%90%AD%E5%BB%BA%E4%BC%81%E4%B8%9A%E7%AB%99-%E6%80%BB%E7%BB%93%E7%AF%87/" title="gatsby搭建企业站-总结篇"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+</body>
+</html>
