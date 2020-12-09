@@ -17,20 +17,20 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>gatsby与对象存储 | 妮妮碎碎念</title>
-  <meta name="description" content="背景用gatsby写完了一个官网，需要将静态资源上传对象存储，一开始尝试使用webpack-alioss-plugin，在项目中添加自定义Webpack配置，在gatsby-node.js中导出一个名为的函数onCreateWebpackConfig，去写AliOSSPlugin,但AliOSSPlugin与gatsby的配套不一定好， 最终，使用gatsby-plugin-s3这个插件，以将ga">
+  <title>webpack基础配置 | 妮妮碎碎念</title>
+  <meta name="description" content="sourcemap存储映射关系  development： cheap-module-eval-source-map  只需要行错误信息, 并且包含第三方模块错误信息, 并且不会生成单独sourcemap文件  production: cheap-module-source-map  只需要行错误信息, 并且包含第三方模块错误信息, 并且会生成单独sourcemap文件  module: 告诉w">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gatsby与对象存储">
-<meta property="og:url" content="https://xxn-my.github.io/2020/10/22/gatsby%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/index.html">
+<meta property="og:title" content="webpack基础配置">
+<meta property="og:url" content="https://xxn-my.github.io/2020/12/09/webpack%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="背景用gatsby写完了一个官网，需要将静态资源上传对象存储，一开始尝试使用webpack-alioss-plugin，在项目中添加自定义Webpack配置，在gatsby-node.js中导出一个名为的函数onCreateWebpackConfig，去写AliOSSPlugin,但AliOSSPlugin与gatsby的配套不一定好， 最终，使用gatsby-plugin-s3这个插件，以将ga">
+<meta property="og:description" content="sourcemap存储映射关系  development： cheap-module-eval-source-map  只需要行错误信息, 并且包含第三方模块错误信息, 并且不会生成单独sourcemap文件  production: cheap-module-source-map  只需要行错误信息, 并且包含第三方模块错误信息, 并且会生成单独sourcemap文件  module: 告诉w">
 <meta property="og:locale" content="zh">
-<meta property="article:published_time" content="2020-10-22T06:59:22.000Z">
-<meta property="article:modified_time" content="2020-10-22T08:20:47.858Z">
+<meta property="article:published_time" content="2020-12-09T08:16:43.000Z">
+<meta property="article:modified_time" content="2020-12-09T08:17:50.398Z">
 <meta property="article:author" content="xxn">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://xxn-my.github.io/2020/10/22/gatsby%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/index.html">
+  <link rel="canonical" href="https://xxn-my.github.io/2020/12/09/webpack%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -225,14 +225,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-gatsby与对象存储" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-webpack基础配置" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      gatsby与对象存储
+      webpack基础配置
     </h1>
   
 
@@ -240,8 +240,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/10/22/gatsby%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/" class="article-date">
-	  <time datetime="2020-10-22T06:59:22.000Z" itemprop="datePublished">2020-10-22</time>
+	<a href="/2020/12/09/webpack%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" class="article-date">
+	  <time datetime="2020-12-09T08:16:43.000Z" itemprop="datePublished">2020-12-09</time>
 	</a>
 </span>
         
@@ -254,13 +254,55 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h5 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h5><p>用gatsby写完了一个官网，需要将静态资源上传对象存储，一开始尝试使用<code>webpack-alioss-plugin</code>，在项目中添加自定义Webpack配置，在<code>gatsby-node.js</code>中导出一个名为的函数<code>onCreateWebpackConfig</code>，去写<code>AliOSSPlugin</code>,但AliOSSPlugin与gatsby的配套不一定好，</p>
-<p>最终，使用<code>gatsby-plugin-s3</code>这个插件，以将gatsby站点部署到S3存储桶</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">      resolve: <span class="string">`gatsby-plugin-s3`</span>,</span><br><span class="line">      options: &#123;</span><br><span class="line">        bucketName: <span class="string">`your-bucketName`</span>,</span><br><span class="line">        region:<span class="string">`your-region`</span>,</span><br><span class="line">        protocol: <span class="string">"https"</span>,</span><br><span class="line">        hostname: <span class="string">"your-hostname"</span>,</span><br><span class="line">        customAwsEndpointHostname: <span class="string">"your-Endpoint"</span>,</span><br><span class="line">        <span class="comment">// mergeCachingParams:true,</span></span><br><span class="line">        parallelLimit:<span class="number">100</span>,</span><br><span class="line">        params:&#123;</span><br><span class="line">          <span class="string">'static/**'</span>: &#123;</span><br><span class="line">            CacheControl: <span class="string">'public, max-age=2592000, immutable'</span></span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="string">'*.&#123;js,css&#125;'</span>:&#123;</span><br><span class="line">            CacheControl: <span class="string">'public, max-age=2592000, immutable'</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+        <ol>
+<li><p>sourcemap存储映射关系</p>
+<ul>
+<li><strong>development</strong>： cheap-module-eval-source-map</li>
+</ul>
+<p>只需要行错误信息, 并且包含第三方模块错误信息, 并且不会生成单独sourcemap文件</p>
+<ul>
+<li><strong>production</strong>: cheap-module-source-map</li>
+</ul>
+<p>只需要行错误信息, 并且包含第三方模块错误信息, 并且会生成单独sourcemap文件</p>
+</li>
+<li><p>module: 告诉webpack如何处理webpack不能够识别的文件</p>
+<ul>
+<li><p>打包图片规则:url-loader</p>
+<p>优势:(相比于file-loader)</p>
+<ul>
+<li>图片比较小的时候直接转换成base64字符串图片, 减少请求次数</li>
+<li>图片比较大的时候由于生成的base64字符串图片也比较大, 就保持原有的图片</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    test: <span class="regexp">/\.(png|jpg|gif)$/</span>,</span><br><span class="line">    use: [</span><br><span class="line">        &#123;</span><br><span class="line">            loader: <span class="string">'url-loader'</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">                <span class="comment">// 指定图片限制的大小</span></span><br><span class="line">                limit: <span class="number">1024</span> * <span class="number">100</span>,</span><br><span class="line">                <span class="comment">// 指定打包后文件名称</span></span><br><span class="line">                name: <span class="string">'[name].[ext]'</span>,</span><br><span class="line">                <span class="comment">// 指定打包后文件存放目录</span></span><br><span class="line">                outputPath: <span class="string">'images/'</span>,</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 
-<p><em>但是要注意，要将assetPrefix设置好，build是时候相应的要加上<code>--prefix-paths</code></em></p>
-<p>这样，build完后执行<code>npx gatsby-plugin-s3 deploy --yes</code>或者进入<code>package.json</code>修改<code>script</code></p>
-<p>就完成了对象存储</p>
+
+
+</li>
+</ol>
+<ul>
+<li>配置less-loader</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  test: <span class="regexp">/\.less$/</span>,</span><br><span class="line">  use: [&#123;</span><br><span class="line">      loader: <span class="string">"style-loader"</span> <span class="comment">// 将 JS 字符串生成为 style 节点</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      loader: <span class="string">"css-loader"</span> ,<span class="comment">// 将 CSS 转化成 CommonJS 模块</span></span><br><span class="line">       options: &#123;</span><br><span class="line">        modules: <span class="literal">true</span> <span class="comment">// 开启CSS模块化</span></span><br><span class="line">       &#125;</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      loader: <span class="string">"less-loader"</span> <span class="comment">// 将 less 编译成 CSS</span></span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​            <em>use:自下而上，自右向左</em></p>
+<ol start="3">
+<li><p>plugins: 告诉webpack需要新增一些什么样的功能</p>
+<ul>
+<li>HtmlWebpackPlugin</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">plugins: [<span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">    <span class="comment">// 指定打包的模板, 如果不指定会自动生成一个空的</span></span><br><span class="line">    template: <span class="string">"./index.html"</span>,</span><br><span class="line">    minify: &#123;</span><br><span class="line">        <span class="comment">// 告诉htmlplugin打包之后的html文件需要压缩</span></span><br><span class="line">        collapseWhitespace: <span class="literal">true</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>webpack-watch</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">watch: <span class="literal">true</span>,</span><br><span class="line">watchOptions: &#123;</span><br><span class="line">    aggregateTimeout: <span class="number">300</span>, <span class="comment">// 防抖, 和函数防抖一样, 改变过程中不重新打包, 只有改变完成指定时间后才打包</span></span><br><span class="line">    poll: <span class="number">1000</span>, <span class="comment">// 每隔多少时间检查一次变动</span></span><br><span class="line">    ignored: <span class="regexp">/node_modules/</span> <span class="comment">// 排除一些巨大的文件夹, 不需要监控的文件夹</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">optimization: 配置webpack的优化项</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line">optimization: &#123;</span><br><span class="line">    minimizer: [<span class="keyword">new</span> TerserJSPlugin(&#123;&#125;), <span class="keyword">new</span> OptimizeCSSAssetsPlugin(&#123;&#125;)],</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>devServer:自动检测文件变化配置</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    contentBase: <span class="string">"./bundle"</span>, <span class="comment">// 打包后的目录</span></span><br><span class="line">    open: <span class="literal">true</span>, <span class="comment">// 是否自动在浏览器中打开</span></span><br><span class="line">    port: <span class="number">9090</span> <span class="comment">// 服务器端口号</span></span><br><span class="line">    proxy: [&#123;</span><br><span class="line">        context: [<span class="string">"/user"</span>, <span class="string">"/login"</span>],</span><br><span class="line">        target: <span class="string">"http://127.0.0.1:3000"</span>,</span><br><span class="line">        changeOrigin: <span class="literal">true</span>,     <span class="comment">// 域名跨域</span></span><br><span class="line">        secure: <span class="literal">false</span>,          <span class="comment">// https跨域</span></span><br><span class="line">        pathRewrite:&#123;<span class="string">""</span>: <span class="string">"/api"</span>&#125; <span class="comment">// 路径重写, 将路径中的api替换为空</span></span><br><span class="line">    &#125;],</span><br><span class="line">    hot: <span class="literal">true</span>, <span class="comment">// 开启热更新, 只要开启了热更新就不会自动刷新网页了</span></span><br><span class="line">    hotOnly: <span class="literal">true</span> <span class="comment">// 哪怕不支持热更新也不要刷新网页</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -270,7 +312,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://xxn-my.github.io/2020/10/22/gatsby%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/" title="gatsby与对象存储" target="_blank" rel="external">https://xxn-my.github.io/2020/10/22/gatsby%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/</a>
+      <a href="https://xxn-my.github.io/2020/12/09/webpack%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" title="webpack基础配置" target="_blank" rel="external">https://xxn-my.github.io/2020/12/09/webpack%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -316,13 +358,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2020/10/22/%E5%BB%BA%E7%AB%8Bgitlab-CICD%E6%B5%81%E6%B0%B4%E7%BA%BF/" title="建立CI/CD流水线"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2020/10/22/%E5%B0%9D%E8%AF%95%E5%B0%81%E8%A3%85%E8%A1%A8%E6%A0%BC%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6/" title="使用antd的upload上传组件，将上传的excel数据转换成JSON对象"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/12/09/TypeScript%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" title="TypeScript入门笔记"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
