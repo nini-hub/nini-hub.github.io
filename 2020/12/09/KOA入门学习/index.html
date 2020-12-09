@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>KOA入门学习 | 妮妮碎碎念</title>
+  <meta name="description" content="开篇 什么是Express? Express是第一代最流行的web框架，它对Node.js的http进行了封装 但是它是’基于ES5’的语法，内部实现异步代码，只有一个方法：’回调’  什么是KOA1.x? 随着新版Node.js开始支持ES6，Express的团队又’基于ES6’重新编写了下一代web框架koa。 和Express相比，koa 1.x’使用generator实现异步’. 用gen">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KOA入门学习">
+<meta property="og:url" content="https://xxn-my.github.io/2020/12/09/KOA%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="开篇 什么是Express? Express是第一代最流行的web框架，它对Node.js的http进行了封装 但是它是’基于ES5’的语法，内部实现异步代码，只有一个方法：’回调’  什么是KOA1.x? 随着新版Node.js开始支持ES6，Express的团队又’基于ES6’重新编写了下一代web框架koa。 和Express相比，koa 1.x’使用generator实现异步’. 用gen">
+<meta property="og:locale" content="zh">
+<meta property="article:published_time" content="2020-12-09T08:47:10.000Z">
+<meta property="article:modified_time" content="2020-12-09T09:18:45.406Z">
+<meta property="article:author" content="xxn">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://xxn-my.github.io/2020/12/09/KOA%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/xxn-my" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">扫眉</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">前端开发</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 福州, 中国</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>来来来跟我唠嗑!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+
+    
+      
+
+    
+      
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/09/KOA%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" class="title">KOA入门学习</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-09T08:47:10.000Z" itemprop="datePublished">2020-12-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/09/webpack%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" class="title">webpack基础配置</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-09T08:16:43.000Z" itemprop="datePublished">2020-12-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/09/TypeScript%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" class="title">TypeScript入门笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-09T08:16:18.000Z" itemprop="datePublished">2020-12-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/09/Express%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" class="title">Express入门学习</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-09T06:15:53.000Z" itemprop="datePublished">2020-12-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/07/%E6%8E%8C%E6%8F%A1%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%89%E7%A7%8D%E7%BD%91%E9%A1%B5%E6%B8%B2%E6%9F%93%E6%96%B9%E5%BC%8F/" class="title">掌握常见的三种网页渲染方式</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-07T06:38:20.000Z" itemprop="datePublished">2020-12-07</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-KOA入门学习" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      KOA入门学习
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/12/09/KOA%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" class="article-date">
+	  <time datetime="2020-12-09T08:47:10.000Z" itemprop="datePublished">2020-12-09</time>
+	</a>
+</span>
+        
+        
+
+        
+
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h4 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h4><ol>
+<li><p>什么是Express?</p>
+<p>Express是第一代最流行的web框架，它对Node.js的http进行了封装</p>
+<p>但是它是’基于ES5’的语法，内部实现异步代码，只有一个方法：’回调’</p>
+</li>
+<li><p>什么是KOA1.x?</p>
+<p>随着新版Node.js开始支持ES6，Express的团队又’基于ES6’重新编写了下一代web框架koa。</p>
+<p>和Express相比，koa 1.x’使用generator实现异步’.</p>
+<p>用generator实现异步比回调简单了不少，但是generator的本意并不是异步</p>
+</li>
+<li><p>什么是KOA2.x?</p>
+<p>koa团队并没有止步于koa 1.x，他们非常超前地’基于ES7’开发了koa2，</p>
+<p>和koa 1相比，koa2完全’使用Promise并配合async来实现异步’</p>
+</li>
+<li><p>Express、Koa1.x、Koa2.x区别</p>
+<ul>
+<li><p>最大的区别就是内部实现异步的方式不同</p>
+<ul>
+<li>Express使用回调函数实现异步, 容易出现回调地狱问题, 但是语法更老兼容性更好</li>
+<li>Koa1.x使用generator实现异步, 解决了回调地域问题, 但是generator的本意并不是异步</li>
+<li>Koa2.x使用Promise并配合async来实现异步, 解决了回调地域问题, 但是语法太新兼容性不好</li>
+</ul>
+</li>
+<li><p>第二大的区别就是重量级不同</p>
+<p>Express中内置了很多封装好的功能, 而Koa中将这些功能都封装到了独立的模块中</p>
+<p>想要使用这些功能必须先安装对应的模块才能使用, 所以Koa比Express更轻量级</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><ol>
+<li><p>如何使用Koa?</p>
+<ul>
+<li><p>手动安装手动配置</p>
+</li>
+<li><p>利用Koa脚手架工具安装使用(Koa-generator)</p>
+</li>
+</ul>
+</li>
+<li><p>手动安装手动配置  <a href="https://www.npmjs.com/package/koa" target="_blank" rel="noopener">https://www.npmjs.com/package/koa</a></p>
+</li>
+</ol>
+<h5 id="手动安装手动配置"><a href="#手动安装手动配置" class="headerlink" title="手动安装手动配置"></a>手动安装手动配置</h5><ol>
+<li><p><code>npm install koa</code></p>
+</li>
+<li><p>app.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.导入Koa</span></span><br><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="comment">// 2.创建服务端实例对象</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="comment">// response</span></span><br><span class="line">app.use(<span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">    ctx.body = <span class="string">'Hello Koa'</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.指定监听的端口</span></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h5 id="处理静态资源"><a href="#处理静态资源" class="headerlink" title="处理静态资源"></a>处理静态资源</h5><ol>
+<li><p>Koa如何处理静态资源?</p>
+<p>Koa是一个轻量级的框架, 它将所有的附加功能都封装到了独立的模块中</p>
+<p>所以想要使用这些功能, 都必须先安装才能使用</p>
+<p><a href="https://www.npmjs.com/package/koa-static" target="_blank" rel="noopener">https://www.npmjs.com/package/koa-static</a></p>
+<p><code>npm install koa-static</code></p>
+</li>
+<li><p>app.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> serve = <span class="built_in">require</span>(<span class="string">'koa-static'</span>); <span class="comment">// 导入处理静态资源的模块</span></span><br><span class="line"><span class="comment">// 2.创建服务端实例对象</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line">app.use(serve(<span class="string">'public'</span>)); <span class="comment">// 注册处理静态资源的中间件</span></span><br><span class="line"><span class="comment">// response</span></span><br><span class="line">app.use(<span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">    ctx.body = <span class="string">'Hello Koa'</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.指定监听的端口</span></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问<code>localhost:3000/login.html</code></p>
+</li>
+</ol>
+<h5 id="处理动态网页"><a href="#处理动态网页" class="headerlink" title="处理动态网页"></a>处理动态网页</h5><ol>
+<li><p>Koa如何处理动态资源?</p>
+<p><a href="https://www.npmjs.com/package/koa-views" target="_blank" rel="noopener">https://www.npmjs.com/package/koa-views</a></p>
+<p>`npm install koa-views</p>
+</li>
+<li><p>app.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.导入Koa</span></span><br><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> serve = <span class="built_in">require</span>(<span class="string">'koa-static'</span>); <span class="comment">// 导入处理静态资源的模块</span></span><br><span class="line"><span class="keyword">const</span> views = <span class="built_in">require</span>(<span class="string">'koa-views'</span>); <span class="comment">// 导入处理动态资源的模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.创建服务端实例对象</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line">app.use(serve(<span class="string">'public'</span>)); <span class="comment">// 注册处理静态资源的中间件</span></span><br><span class="line">app.use(views(<span class="string">'views'</span>, &#123;<span class="attr">extension</span>: <span class="string">'ejs'</span>&#125;));</span><br><span class="line"></span><br><span class="line"><span class="comment">// response</span></span><br><span class="line"><span class="comment">// koa中的ctx就是express中的req,res的结合体</span></span><br><span class="line">app.use( <span class="keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="comment">// ctx.body = 'Hello Koa';</span></span><br><span class="line">    <span class="keyword">await</span> ctx.render(<span class="string">'index'</span>, &#123;<span class="attr">msg</span>: <span class="string">'妮妮碎碎念'</span>&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.指定监听的端口</span></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问`localhost:3000</p>
+</li>
+</ol>
+<h5 id="处理路由"><a href="#处理路由" class="headerlink" title="处理路由"></a>处理路由</h5><ol>
+<li><p>Koa如何处理路由?</p>
+<p><a href="https://www.npmjs.com/package/koa-router" target="_blank" rel="noopener">https://www.npmjs.com/package/koa-router</a></p>
+<p><a href="https://github.com/ZijianHe/koa-router" target="_blank" rel="noopener">https://github.com/ZijianHe/koa-router</a></p>
+<p>`npm install koa-router</p>
+</li>
+<li><p>app.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.导入Koa</span></span><br><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> serve = <span class="built_in">require</span>(<span class="string">'koa-static'</span>); <span class="comment">// 导入处理静态资源的模块</span></span><br><span class="line"><span class="keyword">const</span> views = <span class="built_in">require</span>(<span class="string">'koa-views'</span>); <span class="comment">// 导入处理动态资源的模块</span></span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>); <span class="comment">// 导入处理路由的模块</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(); <span class="comment">// 创建路由对象</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.创建服务端实例对象</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line">app.use(serve(<span class="string">'public'</span>)); <span class="comment">// 注册处理静态资源的中间件</span></span><br><span class="line">app.use(views(<span class="string">'views'</span>, &#123;<span class="attr">extension</span>: <span class="string">'ejs'</span>&#125;)); <span class="comment">// 注册处理动态资源的中间件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理路由</span></span><br><span class="line">router.get(<span class="string">'/api/goods/list'</span>, (ctx, next)=&gt;&#123;</span><br><span class="line">    ctx.body = <span class="string">'get /api/goods/list'</span>; <span class="comment">// ctx.body === res.writeHeader + res.end</span></span><br><span class="line">&#125;);</span><br><span class="line">router.get(<span class="string">'/api/user/login'</span>, (ctx, next)=&gt;&#123;</span><br><span class="line">    ctx.body = &#123;</span><br><span class="line">        method: <span class="string">'get'</span>,</span><br><span class="line">        name: <span class="string">'lnj'</span>,</span><br><span class="line">        age: <span class="number">66</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">router.post(<span class="string">'/api/goods/detail'</span>, (ctx, next)=&gt;&#123;</span><br><span class="line">    ctx.body = <span class="string">'post /api/goods/detail'</span>;</span><br><span class="line">&#125;);</span><br><span class="line">router.post(<span class="string">'/api/user/register'</span>, (ctx, next)=&gt;&#123;</span><br><span class="line">    ctx.body = &#123;</span><br><span class="line">        method: <span class="string">'post'</span>,</span><br><span class="line">        name: <span class="string">'it666'</span>,</span><br><span class="line">        age: <span class="number">33</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app</span><br><span class="line">    .use(router.routes()) <span class="comment">// 启动路由功能</span></span><br><span class="line">    .use(router.allowedMethods()); <span class="comment">// 自动设置响应头</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.指定监听的端口</span></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问`localhost:3000</p>
+</li>
+</ol>
+<h5 id="处理get请求"><a href="#处理get请求" class="headerlink" title="处理get请求"></a>处理get请求</h5><ol>
+<li><p>Koa如何处理Get请求参数?</p>
+<ul>
+<li><p>处理传统get参数</p>
+</li>
+<li><p>处理动态路由形式get参数</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.导入Koa</span></span><br><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> serve = <span class="built_in">require</span>(<span class="string">'koa-static'</span>); <span class="comment">// 导入处理静态资源的模块</span></span><br><span class="line"><span class="keyword">const</span> views = <span class="built_in">require</span>(<span class="string">'koa-views'</span>); <span class="comment">// 导入处理动态资源的模块</span></span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>); <span class="comment">// 导入处理路由的模块</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(); <span class="comment">// 创建路由对象</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.创建服务端实例对象</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">'/user'</span>, (ctx, next)=&gt;&#123;</span><br><span class="line">    <span class="keyword">let</span> request = ctx.request;</span><br><span class="line">    <span class="built_in">console</span>.log(request.query); <span class="comment">// 获取转换成对象之后的get请求参数</span></span><br><span class="line">    <span class="built_in">console</span>.log(request.querystring); <span class="comment">// 获取字符串形式的get请求参数</span></span><br><span class="line">&#125;);</span><br><span class="line">router.get(<span class="string">'/login/:name/:age'</span>, (ctx, next)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(ctx.params);</span><br><span class="line">&#125;);</span><br><span class="line">app.use(serve(<span class="string">'public'</span>)); <span class="comment">// 注册处理静态资源的中间件</span></span><br><span class="line">app.use(views(<span class="string">'views'</span>, &#123;<span class="attr">extension</span>: <span class="string">'ejs'</span>&#125;)); <span class="comment">// 注册处理动态资源的中间件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理路由</span></span><br><span class="line"></span><br><span class="line">app</span><br><span class="line">    .use(router.routes()) <span class="comment">// 启动路由功能</span></span><br><span class="line">    .use(router.allowedMethods()); <span class="comment">// 自动设置响应头</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.指定监听的端口</span></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h5 id="处理post请求"><a href="#处理post请求" class="headerlink" title="处理post请求"></a>处理post请求</h5><ol>
+<li><p>Koa如何处理Post请求参数?</p>
+<ul>
+<li><p>借助koa-bodyparser中间件</p>
+</li>
+<li><p>koa-bodyparser中间件会将post请求参数转换成对象之后放到请求对象的body中</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.导入Koa</span></span><br><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> serve = <span class="built_in">require</span>(<span class="string">'koa-static'</span>); <span class="comment">// 导入处理静态资源的模块</span></span><br><span class="line"><span class="keyword">const</span> views = <span class="built_in">require</span>(<span class="string">'koa-views'</span>); <span class="comment">// 导入处理动态资源的模块</span></span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>); <span class="comment">// 导入处理路由的模块</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(); <span class="comment">// 创建路由对象</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'koa-bodyparser'</span>); <span class="comment">// 导入处理post请求参数的模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.创建服务端实例对象</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line">app.use(serve(<span class="string">'public'</span>)); <span class="comment">// 注册处理静态资源的中间件</span></span><br><span class="line">app.use(views(<span class="string">'views'</span>, &#123;<span class="attr">extension</span>: <span class="string">'ejs'</span>&#125;)); <span class="comment">// 注册处理动态资源的中间件</span></span><br><span class="line"></span><br><span class="line">app.use(bodyParser()); <span class="comment">// 注册处理post请求参数的中间件</span></span><br><span class="line"><span class="comment">// 处理路由</span></span><br><span class="line">router.post(<span class="string">'/user'</span>, (ctx, next)=&gt;&#123;</span><br><span class="line">    <span class="keyword">let</span> request = ctx.request;</span><br><span class="line">    <span class="built_in">console</span>.log(request.body);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app</span><br><span class="line">    .use(router.routes()) <span class="comment">// 启动路由功能</span></span><br><span class="line">    .use(router.allowedMethods()); <span class="comment">// 自动设置响应头</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.指定监听的端口</span></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h5 id="处理cookie"><a href="#处理cookie" class="headerlink" title="处理cookie"></a>处理cookie</h5><ol>
+<li><p>Koa如何处理cookie?</p>
+<p>Koa中处理cookie不需要引入其他模块, 只要拿到ctx对象就可以操作cookie</p>
+<p><a href="https://demopark.github.io/koa-docs-Zh-CN/" target="_blank" rel="noopener">https://demopark.github.io/koa-docs-Zh-CN/</a></p>
+<p><a href="https://demopark.github.io/koa-docs-Zh-CN/api/context.html" target="_blank" rel="noopener">https://demopark.github.io/koa-docs-Zh-CN/api/context.html</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.导入Koa</span></span><br><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> serve = <span class="built_in">require</span>(<span class="string">'koa-static'</span>); <span class="comment">// 导入处理静态资源的模块</span></span><br><span class="line"><span class="keyword">const</span> views = <span class="built_in">require</span>(<span class="string">'koa-views'</span>); <span class="comment">// 导入处理动态资源的模块</span></span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>); <span class="comment">// 导入处理路由的模块</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(); <span class="comment">// 创建路由对象</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'koa-bodyparser'</span>); <span class="comment">// 导入处理post请求参数的模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.创建服务端实例对象</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line">app.use(serve(<span class="string">'public'</span>)); <span class="comment">// 注册处理静态资源的中间件</span></span><br><span class="line">app.use(views(<span class="string">'views'</span>, &#123;<span class="attr">extension</span>: <span class="string">'ejs'</span>&#125;)); <span class="comment">// 注册处理动态资源的中间件</span></span><br><span class="line">app.use(bodyParser()); <span class="comment">// 注册处理post请求参数的中间件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理路由</span></span><br><span class="line">router.get(<span class="string">'/setCookie'</span>, (ctx, next)=&gt;&#123;</span><br><span class="line">    <span class="comment">// ctx.cookies.set('name', 'nini', &#123;</span></span><br><span class="line">    <span class="comment">//     path: '/',</span></span><br><span class="line">    <span class="comment">//     httpOnly: true,</span></span><br><span class="line">    <span class="comment">//     maxAge: 24 * 60 * 60 * 1000</span></span><br><span class="line">    <span class="comment">// &#125;);</span></span><br><span class="line">    <span class="comment">// 注意点: 在koa中不能给cookie设置中文的值</span></span><br><span class="line">    <span class="keyword">let</span> value = <span class="keyword">new</span> Buffer(<span class="string">'妮妮'</span>).toString(<span class="string">'base64'</span>);</span><br><span class="line">    ctx.cookies.set(<span class="string">'userName'</span>, value, &#123;</span><br><span class="line">        path: <span class="string">'/'</span>,</span><br><span class="line">        httpOnly: <span class="literal">true</span>,</span><br><span class="line">        maxAge: <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// let value = new Buffer('妮妮').toString('base64');</span></span><br><span class="line">    <span class="comment">// console.log(value); // 5p2O5Y2X5rGf</span></span><br><span class="line">    <span class="comment">// let res = new Buffer('5p2O5Y2X5rGf', 'base64').toString();</span></span><br><span class="line">    <span class="comment">// console.log(res);</span></span><br><span class="line">&#125;);</span><br><span class="line">router.get(<span class="string">'/getCookie'</span>, (ctx, next)=&gt;&#123;</span><br><span class="line">    <span class="comment">// console.log(ctx.cookies.get('name'));</span></span><br><span class="line">    <span class="keyword">let</span> value = ctx.cookies.get(<span class="string">'userName'</span>);</span><br><span class="line">    <span class="keyword">let</span> res = <span class="keyword">new</span> Buffer(value, <span class="string">'base64'</span>).toString();</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br><span class="line">app</span><br><span class="line">    .use(router.routes()) <span class="comment">// 启动路由功能</span></span><br><span class="line">    .use(router.allowedMethods()); <span class="comment">// 自动设置响应头</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.指定监听的端口</span></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h5 id="处理错误"><a href="#处理错误" class="headerlink" title="处理错误"></a>处理错误</h5><ol>
+<li><p>Koa如何处理错误?</p>
+<p>使用koa-onerror模块</p>
+<p><a href="https://www.npmjs.com/package/koa-onerror" target="_blank" rel="noopener">https://www.npmjs.com/package/koa-onerror</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.导入Koa</span></span><br><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> serve = <span class="built_in">require</span>(<span class="string">'koa-static'</span>); <span class="comment">// 导入处理静态资源的模块</span></span><br><span class="line"><span class="keyword">const</span> views = <span class="built_in">require</span>(<span class="string">'koa-views'</span>); <span class="comment">// 导入处理动态资源的模块</span></span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>); <span class="comment">// 导入处理路由的模块</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(); <span class="comment">// 创建路由对象</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'koa-bodyparser'</span>); <span class="comment">// 导入处理post请求参数的模块</span></span><br><span class="line"><span class="keyword">const</span> onerror = <span class="built_in">require</span>(<span class="string">'koa-onerror'</span>); <span class="comment">// 导入处理错误的模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.创建服务端实例对象</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line">onerror(app); <span class="comment">// 告诉koa-onerror我们需要捕获所有服务端实例对象的错误</span></span><br><span class="line"></span><br><span class="line">app.use(serve(<span class="string">'public'</span>)); <span class="comment">// 注册处理静态资源的中间件</span></span><br><span class="line">app.use(views(<span class="string">'views'</span>, &#123;<span class="attr">extension</span>: <span class="string">'ejs'</span>&#125;)); <span class="comment">// 注册处理动态资源的中间件</span></span><br><span class="line">app.use(bodyParser()); <span class="comment">// 注册处理post请求参数的中间件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理路由</span></span><br><span class="line">router.get(<span class="string">'/api/user/login'</span>, (ctx, next)=&gt;&#123;</span><br><span class="line">    ctx.body = <span class="string">'我是登录'</span>;</span><br><span class="line">&#125;);</span><br><span class="line">router.get(<span class="string">'/api/user/register'</span>, (ctx, next)=&gt;&#123;</span><br><span class="line">    ctx.body = <span class="string">'我是注册'</span>;</span><br><span class="line">&#125;);</span><br><span class="line">app</span><br><span class="line">    .use(router.routes()) <span class="comment">// 启动路由功能</span></span><br><span class="line">    .use(router.allowedMethods()); <span class="comment">// 自动设置响应头</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理错误</span></span><br><span class="line">app.use(<span class="function">(<span class="params">err, ctx</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err.status, err.message);</span><br><span class="line">    ctx.body = err.message;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.指定监听的端口</span></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>撒花撒花~~</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://xxn-my.github.io/2020/12/09/KOA%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" title="KOA入门学习" target="_blank" rel="external">https://xxn-my.github.io/2020/12/09/KOA%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/xxn-my" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/xxn-my" target="_blank"><span class="text-dark">扫眉</span><small class="ml-1x">前端开发</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2020/12/09/webpack%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" title="webpack基础配置"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.jpg" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+</body>
+</html>
