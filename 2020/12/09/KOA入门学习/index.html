@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html lang=zh>
+<html lang="zh">
 <head>
-  <meta charset="utf-8">
-  
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="Cache-Control" content="no-transform" />
-  <meta http-equiv="Cache-Control" content="no-siteapp" />
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="format-detection" content="telephone=no,email=no,adress=no">
-  <!-- Color theme for statusbar -->
-  <meta name="theme-color" content="#000000" />
-  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
-  <meta http-equiv="window-target" content="_top" />
-  
-  
-  <title>KOA入门学习 | 妮妮碎碎念</title>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"nini-hub.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
   <meta name="description" content="开篇 什么是Express? Express是第一代最流行的web框架，它对Node.js的http进行了封装 但是它是’基于ES5’的语法，内部实现异步代码，只有一个方法：’回调’  什么是KOA1.x? 随着新版Node.js开始支持ES6，Express的团队又’基于ES6’重新编写了下一代web框架koa。 和Express相比，koa 1.x’使用generator实现异步’. 用gen">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KOA入门学习">
@@ -29,230 +31,168 @@
 <meta property="article:modified_time" content="2020-12-11T06:27:02.774Z">
 <meta property="article:author" content="xxn">
 <meta name="twitter:card" content="summary">
-  <!-- Canonical links -->
-  <link rel="canonical" href="https://nini-hub.github.io/2020/12/09/KOA%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/index.html">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png" type="image/x-icon">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-  
-  
-  
-<meta name="generator" content="Hexo 4.2.1"></head>
+<link rel="canonical" href="https://nini-hub.github.io/2020/12/09/KOA%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/">
 
 
-<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
-  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-  <div class="slimContent">
-    <div class="navbar-header">
-      
-      
-      <div class="profile-block text-center">
-        <a id="avatar" href="https://github.com/nini-hub" target="_blank">
-          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
-        </a>
-        <h2 id="name" class="hidden-xs hidden-sm">扫眉</h2>
-        <h3 id="title" class="hidden-xs hidden-sm hidden-md">前端开发</h3>
-        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 福州, 中国</small>
-      </div>
-      
-      <div class="search" id="search-form-wrap">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh'
+  };
+</script>
 
-    <form class="search-form sidebar-form">
-        <div class="input-group">
-            <input type="text" class="search-form-input form-control" placeholder="搜索" />
-            <span class="input-group-btn">
-                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+  <title>KOA入门学习 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="تشغيل شريط التصفح">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>الأرشيفات</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://nini-hub.github.io/2020/12/09/KOA%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xxn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          KOA入门学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">نُشر في</span>
+
+              <time title="أُنشأ: 2020-12-09 16:47:10" itemprop="dateCreated datePublished" datetime="2020-12-09T16:47:10+08:00">2020-12-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">عُدل في</span>
+                <time title="عُدل: 2020-12-11 14:27:02" itemprop="dateModified" datetime="2020-12-11T14:27:02+08:00">2020-12-11</time>
+              </span>
+
+          
+
         </div>
-    </form>
-    <div class="ins-search">
-  <div class="ins-search-mask"></div>
-  <div class="ins-search-container">
-    <div class="ins-input-wrapper">
-      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
-      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-    </div>
-    <div class="ins-section-wrapper">
-      <div class="ins-section-container"></div>
-    </div>
-  </div>
-</div>
-
-
-</div>
-      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-  </div>
-</header>
-
-  
-    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
-  <div class="slimContent">
-    
-      <div class="widget">
-    <h3 class="widget-title">公告</h3>
-    <div class="widget-body">
-        <div id="board">
-            <div class="content">
-                <p>来来来跟我唠嗑!</p>
-            </div>
-        </div>
-    </div>
-</div>
+      </header>
 
     
-      
-
     
-      
-
     
-      
-    
-      
-  <div class="widget">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">4</span></li></ul>
-    </div>
-  </div>
+    <div class="post-body" itemprop="articleBody">
 
-
-    
-      
-  <div class="widget">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget-body">
-      <ul class="recent-post-list list-unstyled no-thumbnail">
-        
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                
-              </p>
-              <p class="item-title">
-                <a href="/2020/12/11/%E4%B8%8A%E7%BA%BFnode%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/" class="title">上线node项目笔记</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2020-12-11T06:28:20.000Z" itemprop="datePublished">2020-12-11</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                
-              </p>
-              <p class="item-title">
-                <a href="/2020/12/09/KOA%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" class="title">KOA入门学习</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2020-12-09T08:47:10.000Z" itemprop="datePublished">2020-12-09</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                
-              </p>
-              <p class="item-title">
-                <a href="/2020/12/09/webpack%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" class="title">webpack基础配置</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2020-12-09T08:16:43.000Z" itemprop="datePublished">2020-12-09</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                
-              </p>
-              <p class="item-title">
-                <a href="/2020/12/09/TypeScript%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" class="title">TypeScript入门笔记</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2020-12-09T08:16:18.000Z" itemprop="datePublished">2020-12-09</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                
-              </p>
-              <p class="item-title">
-                <a href="/2020/12/09/Express%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" class="title">Express入门学习</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2020-12-09T06:15:53.000Z" itemprop="datePublished">2020-12-09</time>
-              </p>
-            </div>
-          </li>
-          
-      </ul>
-    </div>
-  </div>
-  
-
-    
-  </div>
-</aside>
-
-  
-  
-<main class="main" role="main">
-  <div class="content">
-  <article id="post-KOA入门学习" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-    
-    <div class="article-header">
-      
-        
-  
-    <h1 class="article-title" itemprop="name">
-      KOA入门学习
-    </h1>
-  
-
-      
-      <div class="article-meta">
-        <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2020/12/09/KOA%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" class="article-date">
-	  <time datetime="2020-12-09T08:47:10.000Z" itemprop="datePublished">2020-12-09</time>
-	</a>
-</span>
-        
-        
-
-        
-
-        
-      </div>
-    </div>
-    <div class="article-entry marked-body" itemprop="articleBody">
       
         <h4 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h4><ol>
 <li><p>什么是Express?</p>
@@ -293,7 +233,7 @@
 </li>
 </ul>
 </li>
-<li><p>手动安装手动配置  <a href="https://www.npmjs.com/package/koa" target="_blank" rel="noopener">https://www.npmjs.com/package/koa</a></p>
+<li><p>手动安装手动配置  <a href="https://www.npmjs.com/package/koa">https://www.npmjs.com/package/koa</a></p>
 </li>
 </ol>
 <h5 id="手动安装手动配置"><a href="#手动安装手动配置" class="headerlink" title="手动安装手动配置"></a>手动安装手动配置</h5><ol>
@@ -308,7 +248,7 @@
 <li><p>Koa如何处理静态资源?</p>
 <p>Koa是一个轻量级的框架, 它将所有的附加功能都封装到了独立的模块中</p>
 <p>所以想要使用这些功能, 都必须先安装才能使用</p>
-<p><a href="https://www.npmjs.com/package/koa-static" target="_blank" rel="noopener">https://www.npmjs.com/package/koa-static</a></p>
+<p><a href="https://www.npmjs.com/package/koa-static">https://www.npmjs.com/package/koa-static</a></p>
 <p><code>npm install koa-static</code></p>
 </li>
 <li><p>app.js</p>
@@ -319,7 +259,7 @@
 </ol>
 <h5 id="处理动态网页"><a href="#处理动态网页" class="headerlink" title="处理动态网页"></a>处理动态网页</h5><ol>
 <li><p>Koa如何处理动态资源?</p>
-<p><a href="https://www.npmjs.com/package/koa-views" target="_blank" rel="noopener">https://www.npmjs.com/package/koa-views</a></p>
+<p><a href="https://www.npmjs.com/package/koa-views">https://www.npmjs.com/package/koa-views</a></p>
 <p>`npm install koa-views</p>
 </li>
 <li><p>app.js</p>
@@ -330,8 +270,8 @@
 </ol>
 <h5 id="处理路由"><a href="#处理路由" class="headerlink" title="处理路由"></a>处理路由</h5><ol>
 <li><p>Koa如何处理路由?</p>
-<p><a href="https://www.npmjs.com/package/koa-router" target="_blank" rel="noopener">https://www.npmjs.com/package/koa-router</a></p>
-<p><a href="https://github.com/ZijianHe/koa-router" target="_blank" rel="noopener">https://github.com/ZijianHe/koa-router</a></p>
+<p><a href="https://www.npmjs.com/package/koa-router">https://www.npmjs.com/package/koa-router</a></p>
+<p><a href="https://github.com/ZijianHe/koa-router">https://github.com/ZijianHe/koa-router</a></p>
 <p>`npm install koa-router</p>
 </li>
 <li><p>app.js</p>
@@ -369,8 +309,8 @@
 <h5 id="处理cookie"><a href="#处理cookie" class="headerlink" title="处理cookie"></a>处理cookie</h5><ol>
 <li><p>Koa如何处理cookie?</p>
 <p>Koa中处理cookie不需要引入其他模块, 只要拿到ctx对象就可以操作cookie</p>
-<p><a href="https://demopark.github.io/koa-docs-Zh-CN/" target="_blank" rel="noopener">https://demopark.github.io/koa-docs-Zh-CN/</a></p>
-<p><a href="https://demopark.github.io/koa-docs-Zh-CN/api/context.html" target="_blank" rel="noopener">https://demopark.github.io/koa-docs-Zh-CN/api/context.html</a></p>
+<p><a href="https://demopark.github.io/koa-docs-Zh-CN/">https://demopark.github.io/koa-docs-Zh-CN/</a></p>
+<p><a href="https://demopark.github.io/koa-docs-Zh-CN/api/context.html">https://demopark.github.io/koa-docs-Zh-CN/api/context.html</a></p>
 <p><em>注意点：如何在koa中存储值为中文的cookie</em></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">// 1.导入Koa</span></span><br><span class="line">   <span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line">   <span class="keyword">const</span> serve = <span class="built_in">require</span>(<span class="string">'koa-static'</span>); <span class="comment">// 导入处理静态资源的模块</span></span><br><span class="line">   <span class="keyword">const</span> views = <span class="built_in">require</span>(<span class="string">'koa-views'</span>); <span class="comment">// 导入处理动态资源的模块</span></span><br><span class="line">   <span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>); <span class="comment">// 导入处理路由的模块</span></span><br><span class="line">   <span class="keyword">const</span> router = <span class="keyword">new</span> Router(); <span class="comment">// 创建路由对象</span></span><br><span class="line">   <span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'koa-bodyparser'</span>); <span class="comment">// 导入处理post请求参数的模块</span></span><br><span class="line">   </span><br><span class="line">   <span class="comment">// 2.创建服务端实例对象</span></span><br><span class="line">   <span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line">   </span><br><span class="line">   app.use(serve(<span class="string">'public'</span>)); <span class="comment">// 注册处理静态资源的中间件</span></span><br><span class="line">   app.use(views(<span class="string">'views'</span>, &#123;<span class="attr">extension</span>: <span class="string">'ejs'</span>&#125;)); <span class="comment">// 注册处理动态资源的中间件</span></span><br><span class="line">   app.use(bodyParser()); <span class="comment">// 注册处理post请求参数的中间件</span></span><br><span class="line">   </span><br><span class="line">   <span class="comment">// 处理路由</span></span><br><span class="line">   router.get(<span class="string">'/setCookie'</span>, (ctx, next)=&gt;&#123;</span><br><span class="line">       <span class="comment">// ctx.cookies.set('name', 'nini', &#123;</span></span><br><span class="line">       <span class="comment">//     path: '/',</span></span><br><span class="line">       <span class="comment">//     httpOnly: true,</span></span><br><span class="line">       <span class="comment">//     maxAge: 24 * 60 * 60 * 1000</span></span><br><span class="line">       <span class="comment">// &#125;);</span></span><br><span class="line">       <span class="comment">// 注意点: 在koa中不能给cookie设置中文的值</span></span><br><span class="line">       <span class="keyword">let</span> value = <span class="keyword">new</span> Buffer(<span class="string">'妮妮'</span>).toString(<span class="string">'base64'</span>);</span><br><span class="line">       ctx.cookies.set(<span class="string">'userName'</span>, value, &#123;</span><br><span class="line">           path: <span class="string">'/'</span>,</span><br><span class="line">           httpOnly: <span class="literal">true</span>,</span><br><span class="line">           maxAge: <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span></span><br><span class="line">       &#125;);</span><br><span class="line">       <span class="comment">// let value = new Buffer('妮妮').toString('base64');</span></span><br><span class="line">       <span class="comment">// console.log(value); // 5p2O5Y2X5rGf</span></span><br><span class="line">       <span class="comment">// let res = new Buffer('5p2O5Y2X5rGf', 'base64').toString();</span></span><br><span class="line">       <span class="comment">// console.log(res);</span></span><br><span class="line">   &#125;);</span><br><span class="line">   router.get(<span class="string">'/getCookie'</span>, (ctx, next)=&gt;&#123;</span><br><span class="line">       <span class="comment">// console.log(ctx.cookies.get('name'));</span></span><br><span class="line">       <span class="keyword">let</span> value = ctx.cookies.get(<span class="string">'userName'</span>);</span><br><span class="line">       <span class="keyword">let</span> res = <span class="keyword">new</span> Buffer(value, <span class="string">'base64'</span>).toString();</span><br><span class="line">       <span class="built_in">console</span>.log(res);</span><br><span class="line">   &#125;);</span><br><span class="line">   app</span><br><span class="line">       .use(router.routes()) <span class="comment">// 启动路由功能</span></span><br><span class="line">       .use(router.allowedMethods()); <span class="comment">// 自动设置响应头</span></span><br><span class="line">   </span><br><span class="line">   <span class="comment">// 3.指定监听的端口</span></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
 
@@ -381,7 +321,7 @@
 <h5 id="处理错误"><a href="#处理错误" class="headerlink" title="处理错误"></a>处理错误</h5><ol>
 <li><p>Koa如何处理错误?</p>
 <p>使用koa-onerror模块</p>
-<p><a href="https://www.npmjs.com/package/koa-onerror" target="_blank" rel="noopener">https://www.npmjs.com/package/koa-onerror</a></p>
+<p><a href="https://www.npmjs.com/package/koa-onerror">https://www.npmjs.com/package/koa-onerror</a></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.导入Koa</span></span><br><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> serve = <span class="built_in">require</span>(<span class="string">'koa-static'</span>); <span class="comment">// 导入处理静态资源的模块</span></span><br><span class="line"><span class="keyword">const</span> views = <span class="built_in">require</span>(<span class="string">'koa-views'</span>); <span class="comment">// 导入处理动态资源的模块</span></span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>); <span class="comment">// 导入处理路由的模块</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(); <span class="comment">// 创建路由对象</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'koa-bodyparser'</span>); <span class="comment">// 导入处理post请求参数的模块</span></span><br><span class="line"><span class="keyword">const</span> onerror = <span class="built_in">require</span>(<span class="string">'koa-onerror'</span>); <span class="comment">// 导入处理错误的模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.创建服务端实例对象</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line">onerror(app); <span class="comment">// 告诉koa-onerror我们需要捕获所有服务端实例对象的错误</span></span><br><span class="line"></span><br><span class="line">app.use(serve(<span class="string">'public'</span>)); <span class="comment">// 注册处理静态资源的中间件</span></span><br><span class="line">app.use(views(<span class="string">'views'</span>, &#123;<span class="attr">extension</span>: <span class="string">'ejs'</span>&#125;)); <span class="comment">// 注册处理动态资源的中间件</span></span><br><span class="line">app.use(bodyParser()); <span class="comment">// 注册处理post请求参数的中间件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理路由</span></span><br><span class="line">router.get(<span class="string">'/api/user/login'</span>, (ctx, next)=&gt;&#123;</span><br><span class="line">    ctx.body = <span class="string">'我是登录'</span>;</span><br><span class="line">&#125;);</span><br><span class="line">router.get(<span class="string">'/api/user/register'</span>, (ctx, next)=&gt;&#123;</span><br><span class="line">    ctx.body = <span class="string">'我是注册'</span>;</span><br><span class="line">&#125;);</span><br><span class="line">app</span><br><span class="line">    .use(router.routes()) <span class="comment">// 启动路由功能</span></span><br><span class="line">    .use(router.allowedMethods()); <span class="comment">// 自动设置响应头</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理错误</span></span><br><span class="line">app.use(<span class="function">(<span class="params">err, ctx</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err.status, err.message);</span><br><span class="line">    ctx.body = err.message;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.指定监听的端口</span></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
 
 </li>
@@ -407,133 +347,188 @@
 </li>
 </ol>
 
-      
     </div>
-    <div class="article-footer">
-      <blockquote class="mt-2x">
-  <ul class="post-copyright list-unstyled">
+
     
-    <li class="post-copyright-link hidden-xs">
-      <strong>本文链接：</strong>
-      <a href="https://nini-hub.github.io/2020/12/09/KOA%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" title="KOA入门学习" target="_blank" rel="external">https://nini-hub.github.io/2020/12/09/KOA%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/</a>
-    </li>
     
-    <li class="post-copyright-license">
-      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
-    </li>
-  </ul>
-</blockquote>
+    
+
+      <footer class="post-footer">
+
+        
 
 
-<div class="panel panel-default panel-badger">
-  <div class="panel-body">
-    <figure class="media">
-      <div class="media-left">
-        <a href="https://github.com/nini-hub" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
-        </a>
-      </div>
-      <div class="media-body">
-        <h3 class="media-heading"><a href="https://github.com/nini-hub" target="_blank"><span class="text-dark">扫眉</span><small class="ml-1x">前端开发</small></a></h3>
-        <div>个人简介。</div>
-      </div>
-    </figure>
-  </div>
-</div>
-
-
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/09/webpack%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" rel="prev" title="webpack基础配置">
+      <i class="fa fa-chevron-left"></i> webpack基础配置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/11/%E4%B8%8A%E7%BA%BFnode%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/" rel="next" title="上线node项目笔记">
+      上线node项目笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
+      </footer>
+    
   </article>
   
-    
-  <section id="comments">
-  	
-      <div id="vcomments"></div>
-    
-  </section>
+  
+  
 
 
-  
-</div>
 
-  <nav class="bar bar-footer clearfix" data-stick-bottom>
-  <div class="bar-inner">
-  
-  <ul class="pager pull-left">
-    
-    <li class="prev">
-      <a href="/2020/12/11/%E4%B8%8A%E7%BA%BFnode%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/" title="上线node项目笔记"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
-    
-    <li class="next">
-      <a href="/2020/12/09/webpack%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" title="webpack基础配置"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
-    </li>
-    
-    
-  </ul>
-  
-  
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
-  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
-    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
-  </div> -->
-  
-  
-  <div class="bar-right">
-    
-    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
-    
-  </div>
-  </div>
-</nav>
-  
-<!-- Modal -->
-<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content donate">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <div class="modal-body">
-        <div class="donate-box">
-          <div class="donate-head">
-            <p>感谢您的支持，我会继续努力的!</p>
           </div>
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
-              <div class="donate-payimg">
-                <img src="/../images/donate/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
-              </div>
-              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
-              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
-              <div class="donate-payimg">
-                <img src="/../images/donate/wechatpayimg.jpg" alt="扫码支持" title="扫一扫" />
-              </div>
-              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
-              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
-            </div>
-          </div>
-          <div class="donate-footer">
-            <ul class="nav nav-tabs nav-justified" role="tablist">
-              <li role="presentation" class="active">
-                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
-              </li>
-              <li role="presentation" class="">
-                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
-              </li>
-            </ul>
-          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
         </div>
-      </div>
-    </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          المحتويات
+        </li>
+        <li class="sidebar-nav-overview">
+          عام
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#开篇"><span class="nav-number">1.</span> <span class="nav-text">开篇</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本使用"><span class="nav-number">2.</span> <span class="nav-text">基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#手动安装手动配置"><span class="nav-number">2.1.</span> <span class="nav-text">手动安装手动配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#处理静态资源"><span class="nav-number">2.2.</span> <span class="nav-text">处理静态资源</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#处理动态网页"><span class="nav-number">2.3.</span> <span class="nav-text">处理动态网页</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#处理路由"><span class="nav-number">2.4.</span> <span class="nav-text">处理路由</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#处理get请求"><span class="nav-number">2.5.</span> <span class="nav-text">处理get请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#处理post请求"><span class="nav-number">2.6.</span> <span class="nav-text">处理post请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#处理cookie"><span class="nav-number">2.7.</span> <span class="nav-text">处理cookie</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#处理错误"><span class="nav-number">2.8.</span> <span class="nav-text">处理错误</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用脚手架"><span class="nav-number">2.9.</span> <span class="nav-text">使用脚手架</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xxn</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">المقالات</span>
+        </a>
+      </div>
+  </nav>
 </div>
 
 
 
-</main>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xxn</span>
+</div>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
 
 </body>
 </html>
