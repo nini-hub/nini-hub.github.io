@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"nini-hub.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"nini-hub.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="小菜鸡来写gitlab-ci了历劫前补补课CI &#x2F; CD方法论简介软件开发的连续方法基于自动执行脚本，以最大程度地减少在开发应用程序时引入错误的机会。从开发新代码到部署新代码，他们几乎不需要人工干预，甚至根本不需要干预。 GitLab CI &#x2F; CD是GitLab内置的功能强大的工具，它使您可以将所有连续方法（连续集成，交付和部署）应用于软件，而无需第三方应用程序或集成。 一些常用的关键字   关">
@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh">
 <meta property="article:published_time" content="2020-10-22T08:22:26.000Z">
 <meta property="article:modified_time" content="2020-10-26T01:21:43.317Z">
-<meta property="article:author" content="xxn">
+<meta property="article:author" content="妮妮妮">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://nini-hub.github.io/2020/10/22/%E5%BB%BA%E7%AB%8Bgitlab-CICD%E6%B5%81%E6%B0%B4%E7%BA%BF/">
@@ -117,11 +117,6 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>الأرشيفات</a>
-
-  </li>
   </ul>
 </nav>
 
@@ -153,8 +148,8 @@
     <link itemprop="mainEntityOfPage" href="https://nini-hub.github.io/2020/10/22/%E5%BB%BA%E7%AB%8Bgitlab-CICD%E6%B5%81%E6%B0%B4%E7%BA%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xxn">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="妮妮妮">
       <meta itemprop="description" content="">
     </span>
 
@@ -204,95 +199,95 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#script"><code>script</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#script" target="_blank" rel="noopener"><code>script</code></a></td>
 <td align="left">运行程序执行的Shell脚本。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#before_script-and-after_script"><code>after_script</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#before_script-and-after_script" target="_blank" rel="noopener"><code>after_script</code></a></td>
 <td align="left">覆盖作业后执行的一组命令。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#allow_failure"><code>allow_failure</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#allow_failure" target="_blank" rel="noopener"><code>allow_failure</code></a></td>
 <td align="left">允许作业失败。失败的作业不会影响提交状态。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#artifacts"><code>artifacts</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#artifacts" target="_blank" rel="noopener"><code>artifacts</code></a></td>
 <td align="left">成功时附加到作业的文件和目录列表。也可用：<code>artifacts:paths</code>，<code>artifacts:exclude</code>，<code>artifacts:expose_as</code>，<code>artifacts:name</code>，<code>artifacts:untracked</code>，<code>artifacts:when</code>，<code>artifacts:expire_in</code>，和<code>artifacts:reports</code>。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#before_script-and-after_script"><code>before_script</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#before_script-and-after_script" target="_blank" rel="noopener"><code>before_script</code></a></td>
 <td align="left">覆盖作业之前执行的一组命令。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#cache"><code>cache</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#cache" target="_blank" rel="noopener"><code>cache</code></a></td>
 <td align="left">在后续运行之间应缓存的文件列表。也可用：<code>cache:paths</code>，<code>cache:key</code>，<code>cache:untracked</code>，<code>cache:when</code>，和<code>cache:policy</code>。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#coverage"><code>coverage</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#coverage" target="_blank" rel="noopener"><code>coverage</code></a></td>
 <td align="left">给定作业的代码覆盖率设置。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#dependencies"><code>dependencies</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#dependencies" target="_blank" rel="noopener"><code>dependencies</code></a></td>
 <td align="left">通过提供要从中获取工件的作业列表，限制将哪些工件传递给特定作业。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#environment"><code>environment</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#environment" target="_blank" rel="noopener"><code>environment</code></a></td>
 <td align="left">作业部署到的环境的名称。也可用：<code>environment:name</code>，<code>environment:url</code>，<code>environment:on_stop</code>，<code>environment:auto_stop_in</code>，和<code>environment:action</code>。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#onlyexcept-basic"><code>except</code></a></td>
-<td align="left">限制不创建作业的时间。也可用：<a href="https://docs.gitlab.com/ee/ci/yaml/README.html#onlyexcept-advanced"><code>except:refs</code>，<code>except:kubernetes</code>，<code>except:variables</code>，和<code>except:changes</code></a>。</td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#onlyexcept-basic" target="_blank" rel="noopener"><code>except</code></a></td>
+<td align="left">限制不创建作业的时间。也可用：<a href="https://docs.gitlab.com/ee/ci/yaml/README.html#onlyexcept-advanced" target="_blank" rel="noopener"><code>except:refs</code>，<code>except:kubernetes</code>，<code>except:variables</code>，和<code>except:changes</code></a>。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#extends"><code>extends</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#extends" target="_blank" rel="noopener"><code>extends</code></a></td>
 <td align="left">该作业继承的配置条目。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#image"><code>image</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#image" target="_blank" rel="noopener"><code>image</code></a></td>
 <td align="left">使用Docker映像 也可用：<code>image:name</code>和<code>image:entrypoint</code>。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#include"><code>include</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#include" target="_blank" rel="noopener"><code>include</code></a></td>
 <td align="left">允许此作业包括外部YAML文件。也可用：<code>include:local</code>，<code>include:file</code>，<code>include:template</code>，和<code>include:remote</code>。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#onlyexcept-basic"><code>only</code></a></td>
-<td align="left">限制创建作业的时间。也可用：<a href="https://docs.gitlab.com/ee/ci/yaml/README.html#onlyexcept-advanced"><code>only:refs</code>，<code>only:kubernetes</code>，<code>only:variables</code>，和<code>only:changes</code></a>。</td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#onlyexcept-basic" target="_blank" rel="noopener"><code>only</code></a></td>
+<td align="left">限制创建作业的时间。也可用：<a href="https://docs.gitlab.com/ee/ci/yaml/README.html#onlyexcept-advanced" target="_blank" rel="noopener"><code>only:refs</code>，<code>only:kubernetes</code>，<code>only:variables</code>，和<code>only:changes</code></a>。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#parallel"><code>parallel</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#parallel" target="_blank" rel="noopener"><code>parallel</code></a></td>
 <td align="left">多少个作业实例应并行运行。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#release"><code>release</code></a></td>
-<td align="left">指示运行程序生成<a href="https://docs.gitlab.com/ee/user/project/releases/index.html">Release</a>对象。</td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#release" target="_blank" rel="noopener"><code>release</code></a></td>
+<td align="left">指示运行程序生成<a href="https://docs.gitlab.com/ee/user/project/releases/index.html" target="_blank" rel="noopener">Release</a>对象。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#retry"><code>retry</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#retry" target="_blank" rel="noopener"><code>retry</code></a></td>
 <td align="left">发生故障时可以自动重试作业的时间和次数。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#rules"><code>rules</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#rules" target="_blank" rel="noopener"><code>rules</code></a></td>
 <td align="left">评估和确定作业的所选属性以及是否创建作业的条件列表。不能与<code>only</code>/一起使用<code>except</code>。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#stage"><code>stage</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#stage" target="_blank" rel="noopener"><code>stage</code></a></td>
 <td align="left">定义一个作业阶段（默认值：）<code>test</code>。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#tags"><code>tags</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#tags" target="_blank" rel="noopener"><code>tags</code></a></td>
 <td align="left">用于选择runner的标签列表。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#trigger"><code>trigger</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#trigger" target="_blank" rel="noopener"><code>trigger</code></a></td>
 <td align="left">定义下游管道触发器。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#variables"><code>variables</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#variables" target="_blank" rel="noopener"><code>variables</code></a></td>
 <td align="left">在作业级别上定义作业变量。</td>
 </tr>
 <tr>
-<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#when"><code>when</code></a></td>
+<td align="left"><a href="https://docs.gitlab.com/ee/ci/yaml/README.html#when" target="_blank" rel="noopener"><code>when</code></a></td>
 <td align="left">什么时候开始工作。也可用：<code>when:manual</code>和<code>when:delayed</code>。</td>
 </tr>
 </tbody></table>
@@ -452,20 +447,29 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">xxn</p>
+    <img class="site-author-image" itemprop="image" alt="妮妮妮"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">妮妮妮</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
+          <a href="/archives">
           <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">المقالات</span>
         </a>
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/nini-hub" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;nini-hub" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/490201490@qq.com" title="E-Mail → 490201490@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
 
 
@@ -492,9 +496,9 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">xxn</span>
+  <span class="author" itemprop="copyrightHolder">妮妮妮</span>
 </div>
-  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">تطبيق الموقع <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
 
@@ -522,7 +526,7 @@
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
