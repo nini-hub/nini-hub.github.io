@@ -140,6 +140,122 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://nini-hub.github.io/2021/01/12/%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="妮妮妮">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ninihub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/12/%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" class="post-title-link" itemprop="url">遇到的坑</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">نُشر في</span>
+              
+
+              <time title="أُنشأ: 2021-01-12 10:06:34 / عُدل: 10:21:23" itemprop="dateCreated datePublished" datetime="2021-01-12T10:06:34+08:00">2021-01-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="gatsby搭建企业站，使用scrollreveal在元素滚动到视图中时对其进行动画处理，在执行gatsby-build的时候出现如下错误"><a href="#gatsby搭建企业站，使用scrollreveal在元素滚动到视图中时对其进行动画处理，在执行gatsby-build的时候出现如下错误" class="headerlink" title="gatsby搭建企业站，使用scrollreveal在元素滚动到视图中时对其进行动画处理，在执行gatsby build的时候出现如下错误"></a>gatsby搭建企业站，使用<code>scrollreveal</code>在元素滚动到视图中时对其进行动画处理，在执行<code>gatsby build</code>的时候出现如下错误</h4><p> ERROR #95312 </p>
+<p>“window” is not available during server side rendering.</p>
+<p>See our docs page for more info on this error: <a href="https://gatsby.dev/debug-html" target="_blank" rel="noopener">https://gatsby.dev/debug-html</a></p>
+<p> })();</p>
+<p> var index = window.requestAnimationFrame ||</p>
+<p>window.webkitRequestAnimationFrame ||<br>window.mozRequestAnimationFrame ||<br>polyfill;</p>
+<p>  WebpackError: ReferenceError: window is not defined</p>
+<ul>
+<li><p>miniraf.es.js:38<br>node_modules/miniraf/dist/miniraf.es.js:38:1</p>
+</li>
+<li><p>scrollreveal.es.js:1<br>node_modules/scrollreveal/dist/scrollreveal.es.js:1:1</p>
+</li>
+<li><p>service.js:1<br>src/components/home/service.js:1:1</p>
+</li>
+<li><p>index.js:1<br>src/pages/index.js:1:1</p>
+</li>
+</ul>
+<p>not finished Generating image thumbnails - 18.303s</p>
+<ol>
+<li><p>问题分析</p>
+<p>通常，由于以下原因之一，在生成静态HTML文件时发生错误：</p>
+<ul>
+<li><p>某些代码引用了“浏览器全局变量”，例如window或document。 如果这是您的问题，则应该在上面看到类似<code>window is not defined</code>的错误。 要解决此问题，请找出有问题的代码，或者</p>
+<ul>
+<li>在定义窗口之前调用此代码之前进行检查，以便在构建盖茨比时该代码无法运行（请参见下面的代码示例）；</li>
+<li>如果该代码位于的render函数中 一个React.js组件，将该代码移动到componentDidMount生命周期或useEffect挂钩中，以确保该代码除非在浏览器中运行，否则不会运行</li>
+</ul>
+</li>
+<li><p>检查页面目录（和所有子目录）中列出的每个JS文件是否正在导出React组件或字符串。 Gatsby会将页面目录下列出的所有JS文件都视为页面组件，因此它必须具有默认导出，即组件或字符串。</p>
+</li>
+<li><p>您混淆了导入，并要求在同一文件中进行调用。 由于webpack 4的版本比v3严格，因此这可能会导致“ WebpackError: Invariant Violation: Minified React error”。 解决方案是仅使用导入，这也扩展到gatsby-ssr和gatsby-browser文件。</p>
+</li>
+<li><p>您的应用程序未正确<a href="https://reactjs.org/docs/react-dom.html" target="_blank" rel="noopener">hydrated</a>，导致gatsby开发和gatsby构建不一致。 gatsby-ssr或gatsby-browser之类的文件中的更改很可能具有另一个文件中未反映的结构，这意味着客户端和服务器输出之间不匹配。</p>
+</li>
+</ul>
+</li>
+<li><p>解决方案</p>
+<p>定位问题后，是使用了<code>scrollreveal</code>的原因，该模块期望定义window。 </p>
+<ol>
+<li><p>修复第三方模块的问题</p>
+<p>一种解决方案是自定义Webpack配置，以在服务器渲染期间用虚拟模块替换有问题的模块。</p>
+<p>项目根目录中的gatsby-node.js：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">exports.onCreateWebpackConfig = <span class="function">(<span class="params">&#123; stage, loaders, actions &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (stage === <span class="string">"build-html"</span>) &#123;</span><br><span class="line">    actions.setWebpackConfig(&#123;</span><br><span class="line">      <span class="built_in">module</span>: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">          &#123;</span><br><span class="line">            test: <span class="regexp">/bad-module/</span>, <span class="comment">// 写上问题模块 此处我的应该是`scrollreveal`</span></span><br><span class="line">            use: loaders.null(),</span><br><span class="line">          &#125;,</span><br><span class="line">        ],</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+</li>
+</ol>
+<ol start="2">
+<li>另一种解决方案是 <a href="https://github.com/gregberge/loadable-components" target="_blank" rel="noopener">loadable-components</a>. 尝试使用窗口的模块将仅在客户端动态加载（而不是在SSR期间加载).</li>
+</ol>
+<ol start="3">
+<li><p>总结</p>
+<p>当在Gatsby中使用带有window定义的第三方模块时，需要向其自己的webpack配置中添加一个空的loader，以避免在SSR（服务器端渲染）期间进行编译。 因为执行gatsby develop的环境是发生在浏览器中，而执行gatsby build是在Node服务器中（显然没有窗口或其他全局对象。）</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
     <link itemprop="mainEntityOfPage" href="https://nini-hub.github.io/2021/01/11/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E4%B9%8Bpuppeteer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2096,156 +2212,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
-    <link itemprop="mainEntityOfPage" href="https://nini-hub.github.io/2020/12/07/%E6%8E%8C%E6%8F%A1%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%89%E7%A7%8D%E7%BD%91%E9%A1%B5%E6%B8%B2%E6%9F%93%E6%96%B9%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="妮妮妮">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ninihub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/07/%E6%8E%8C%E6%8F%A1%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%89%E7%A7%8D%E7%BD%91%E9%A1%B5%E6%B8%B2%E6%9F%93%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">掌握常见的三种网页渲染方式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">نُشر في</span>
-              
-
-              <time title="أُنشأ: 2020-12-07 14:38:20 / عُدل: 14:46:26" itemprop="dateCreated datePublished" datetime="2020-12-07T14:38:20+08:00">2020-12-07</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="单页Web应用（SPA-Single-Page-web-Application）"><a href="#单页Web应用（SPA-Single-Page-web-Application）" class="headerlink" title="单页Web应用（SPA - Single Page web Application）"></a>单页Web应用（SPA - Single Page web Application）</h3><p>理解：只有一个HTML文件的Web应用, 我们就称之为单页Web应用, 就称之为SPA应用</p>
-<h4 id="SPA的特点"><a href="#SPA的特点" class="headerlink" title="SPA的特点"></a>SPA的特点</h4><ol>
-<li><p>SPA应用只有一个HTML文件, 所有的内容其实都在这个页面中呈现的</p>
-</li>
-<li><p>SPA应用只会加载一次HTML文件, 不会因为用户的操作而进行页面的重新加载</p>
-</li>
-<li><p>当用户与应用程序交互时, 是通过动态更新页面内容的方式来呈现不同的内容</p>
-</li>
-</ol>
-<h4 id="SPA优点"><a href="#SPA优点" class="headerlink" title="SPA优点"></a>SPA优点</h4><ol>
-<li><p>有良好的交互体验</p>
-<p>不会重新加载整个网页, 只是局部更新</p>
-</li>
-<li><p>前后端分离开发</p>
-<p>前端负责页面呈现和交互, 后端负责数据</p>
-</li>
-<li><p>减轻服务器压力</p>
-<p>只用处理数据不用处理界面</p>
-</li>
-<li><p>共用一套后端程序代码</p>
-</li>
-</ol>
-<h4 id="SPA缺点"><a href="#SPA缺点" class="headerlink" title="SPA缺点"></a>SPA缺点</h4><ol>
-<li><p>SEO难度较高</p>
-<p>只有一个界面, 无法针对不同的内容编写不同的SEO信息</p>
-</li>
-<li><p>初次加载耗时多</p>
-<p>为实现单页Web应用功能及显示效果，需要在加载页面的时候将所有JavaScript、CSS统一加载，</p>
-</li>
-</ol>
-<h3 id="如何解决单页面应用的SEO困难问题"><a href="#如何解决单页面应用的SEO困难问题" class="headerlink" title="如何解决单页面应用的SEO困难问题?"></a>如何解决单页面应用的SEO困难问题?</h3><p>解决这个问题之前首先我们需要了解常见的三种网页渲染方式</p>
-<h4 id="客户端渲染-CSR-Client-Side-Render"><a href="#客户端渲染-CSR-Client-Side-Render" class="headerlink" title="客户端渲染(CSR - Client Side Render)"></a>客户端渲染(CSR - Client Side Render)</h4><p>后端只提供数据，前端做视图和交互逻辑(SPA应用就是典型的客户端渲染)</p>
-<h5 id="客户端渲染过程"><a href="#客户端渲染过程" class="headerlink" title="客户端渲染过程"></a>客户端渲染过程</h5><ol>
-<li><p>客户端请求html (请求)</p>
-</li>
-<li><p>服务端返回html</p>
-</li>
-<li><p>客户端渲染HTML,找到依赖的JS/CSS文件</p>
-</li>
-<li><p>客户端请求对应的JS/CSS文件 (请求)</p>
-</li>
-<li><p>服务端返回对应的JS/CSS文件</p>
-</li>
-<li><p>客户端等待JS/CSS文件下载完成</p>
-</li>
-<li><p>客户端加载并初始化下载好的JS文件</p>
-</li>
-<li><p>客户端执行JS代码向后端请求数据 (请求)</p>
-</li>
-<li><p>服务端返回数据</p>
-</li>
-<li><p>客户端利用服务端返回的数据填充网页</p>
-</li>
-</ol>
-<h5 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h5><p><strong>最大优点:</strong> 交互体验好可以做局部更新</p>
-<p><strong>最大缺点:</strong> 首屏加载慢(因为要等到HTML下载完才会去下载JS/CSS, 要等到JS下载完初始化完才会去获取数据),</p>
-<h4 id="服务端渲染-SSR-Server-Side-Render"><a href="#服务端渲染-SSR-Server-Side-Render" class="headerlink" title="服务端渲染(SSR - Server Side Render)"></a>服务端渲染(SSR - Server Side Render)</h4><p>后端既提供数据又提供视图和交互逻辑</p>
-<p>也就是服务器接到客户端请求之后，找到对应的数据并根据找到的数据生成对应的视图</p>
-<p>然后将包含数据的视图一次性发给客户端，客户端直接将渲染即可</p>
-<h5 id="服务端渲染过程"><a href="#服务端渲染过程" class="headerlink" title="服务端渲染过程"></a>服务端渲染过程</h5><ol>
-<li><p>客户端请求html (请求)</p>
-</li>
-<li><p>服务端内部查找对应的html文件和数据</p>
-</li>
-<li><p>服务器内部根据数据html文件和数据生成完整网页</p>
-</li>
-<li><p>服务端返回完整网页</p>
-</li>
-<li><p>客户端渲染HTML,找到依赖的JS/CSS文件</p>
-</li>
-<li><p>客户端请求对应的JS/CSS文件 (请求)</p>
-</li>
-<li><p>客户端等待JS/CSS文件下载完成</p>
-</li>
-<li><p>客户直接展示网页</p>
-</li>
-</ol>
-<h5 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h5><p><strong>最大优点:</strong> 首屏加载快(因为服务器返回的网页已经包含数据, 所以之下载完JS/CSS就可以直接渲染)</p>
-<p>​     每次请求返回的都是一个独立完成的网页, 更利于SEO</p>
-<p><strong>最大缺点:</strong>网络传输数据量大</p>
-<h4 id="预渲染"><a href="#预渲染" class="headerlink" title="预渲染"></a>预渲染</h4><p>无需服务器实时动态编译，采用预渲染，在构建时针对特定路由简单的生成静态HTML文件</p>
-<p>本质就是客户端渲染, 只不过和SPA不同的是预渲染有多个界面</p>
-<h5 id="优缺点-2"><a href="#优缺点-2" class="headerlink" title="优缺点"></a>优缺点</h5><p><strong>最大优点:</strong> 由于有多个界面, 所以更利于SEO</p>
-<p><strong>最大缺点:</strong> 首屏加载慢, 预编译会非常的慢</p>
-<h4 id="如何选择"><a href="#如何选择" class="headerlink" title="如何选择"></a>如何选择</h4><ol>
-<li><p>注重SEO的新闻、电商网站，建议采用服务器端渲染</p>
-</li>
-<li><p>强交互的页面，不注重SEO，采用客户端渲染</p>
-</li>
-<li><p>两者之间, 只需改善少数页面的SEO，采用预渲染</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2316,7 +2282,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">المقالات</span>
         </a>
       </div>

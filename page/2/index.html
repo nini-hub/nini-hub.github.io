@@ -140,6 +140,156 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://nini-hub.github.io/2020/12/07/%E6%8E%8C%E6%8F%A1%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%89%E7%A7%8D%E7%BD%91%E9%A1%B5%E6%B8%B2%E6%9F%93%E6%96%B9%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="妮妮妮">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ninihub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/07/%E6%8E%8C%E6%8F%A1%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%89%E7%A7%8D%E7%BD%91%E9%A1%B5%E6%B8%B2%E6%9F%93%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">掌握常见的三种网页渲染方式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">نُشر في</span>
+              
+
+              <time title="أُنشأ: 2020-12-07 14:38:20 / عُدل: 14:46:26" itemprop="dateCreated datePublished" datetime="2020-12-07T14:38:20+08:00">2020-12-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="单页Web应用（SPA-Single-Page-web-Application）"><a href="#单页Web应用（SPA-Single-Page-web-Application）" class="headerlink" title="单页Web应用（SPA - Single Page web Application）"></a>单页Web应用（SPA - Single Page web Application）</h3><p>理解：只有一个HTML文件的Web应用, 我们就称之为单页Web应用, 就称之为SPA应用</p>
+<h4 id="SPA的特点"><a href="#SPA的特点" class="headerlink" title="SPA的特点"></a>SPA的特点</h4><ol>
+<li><p>SPA应用只有一个HTML文件, 所有的内容其实都在这个页面中呈现的</p>
+</li>
+<li><p>SPA应用只会加载一次HTML文件, 不会因为用户的操作而进行页面的重新加载</p>
+</li>
+<li><p>当用户与应用程序交互时, 是通过动态更新页面内容的方式来呈现不同的内容</p>
+</li>
+</ol>
+<h4 id="SPA优点"><a href="#SPA优点" class="headerlink" title="SPA优点"></a>SPA优点</h4><ol>
+<li><p>有良好的交互体验</p>
+<p>不会重新加载整个网页, 只是局部更新</p>
+</li>
+<li><p>前后端分离开发</p>
+<p>前端负责页面呈现和交互, 后端负责数据</p>
+</li>
+<li><p>减轻服务器压力</p>
+<p>只用处理数据不用处理界面</p>
+</li>
+<li><p>共用一套后端程序代码</p>
+</li>
+</ol>
+<h4 id="SPA缺点"><a href="#SPA缺点" class="headerlink" title="SPA缺点"></a>SPA缺点</h4><ol>
+<li><p>SEO难度较高</p>
+<p>只有一个界面, 无法针对不同的内容编写不同的SEO信息</p>
+</li>
+<li><p>初次加载耗时多</p>
+<p>为实现单页Web应用功能及显示效果，需要在加载页面的时候将所有JavaScript、CSS统一加载，</p>
+</li>
+</ol>
+<h3 id="如何解决单页面应用的SEO困难问题"><a href="#如何解决单页面应用的SEO困难问题" class="headerlink" title="如何解决单页面应用的SEO困难问题?"></a>如何解决单页面应用的SEO困难问题?</h3><p>解决这个问题之前首先我们需要了解常见的三种网页渲染方式</p>
+<h4 id="客户端渲染-CSR-Client-Side-Render"><a href="#客户端渲染-CSR-Client-Side-Render" class="headerlink" title="客户端渲染(CSR - Client Side Render)"></a>客户端渲染(CSR - Client Side Render)</h4><p>后端只提供数据，前端做视图和交互逻辑(SPA应用就是典型的客户端渲染)</p>
+<h5 id="客户端渲染过程"><a href="#客户端渲染过程" class="headerlink" title="客户端渲染过程"></a>客户端渲染过程</h5><ol>
+<li><p>客户端请求html (请求)</p>
+</li>
+<li><p>服务端返回html</p>
+</li>
+<li><p>客户端渲染HTML,找到依赖的JS/CSS文件</p>
+</li>
+<li><p>客户端请求对应的JS/CSS文件 (请求)</p>
+</li>
+<li><p>服务端返回对应的JS/CSS文件</p>
+</li>
+<li><p>客户端等待JS/CSS文件下载完成</p>
+</li>
+<li><p>客户端加载并初始化下载好的JS文件</p>
+</li>
+<li><p>客户端执行JS代码向后端请求数据 (请求)</p>
+</li>
+<li><p>服务端返回数据</p>
+</li>
+<li><p>客户端利用服务端返回的数据填充网页</p>
+</li>
+</ol>
+<h5 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h5><p><strong>最大优点:</strong> 交互体验好可以做局部更新</p>
+<p><strong>最大缺点:</strong> 首屏加载慢(因为要等到HTML下载完才会去下载JS/CSS, 要等到JS下载完初始化完才会去获取数据),</p>
+<h4 id="服务端渲染-SSR-Server-Side-Render"><a href="#服务端渲染-SSR-Server-Side-Render" class="headerlink" title="服务端渲染(SSR - Server Side Render)"></a>服务端渲染(SSR - Server Side Render)</h4><p>后端既提供数据又提供视图和交互逻辑</p>
+<p>也就是服务器接到客户端请求之后，找到对应的数据并根据找到的数据生成对应的视图</p>
+<p>然后将包含数据的视图一次性发给客户端，客户端直接将渲染即可</p>
+<h5 id="服务端渲染过程"><a href="#服务端渲染过程" class="headerlink" title="服务端渲染过程"></a>服务端渲染过程</h5><ol>
+<li><p>客户端请求html (请求)</p>
+</li>
+<li><p>服务端内部查找对应的html文件和数据</p>
+</li>
+<li><p>服务器内部根据数据html文件和数据生成完整网页</p>
+</li>
+<li><p>服务端返回完整网页</p>
+</li>
+<li><p>客户端渲染HTML,找到依赖的JS/CSS文件</p>
+</li>
+<li><p>客户端请求对应的JS/CSS文件 (请求)</p>
+</li>
+<li><p>客户端等待JS/CSS文件下载完成</p>
+</li>
+<li><p>客户直接展示网页</p>
+</li>
+</ol>
+<h5 id="优缺点-1"><a href="#优缺点-1" class="headerlink" title="优缺点"></a>优缺点</h5><p><strong>最大优点:</strong> 首屏加载快(因为服务器返回的网页已经包含数据, 所以之下载完JS/CSS就可以直接渲染)</p>
+<p>​     每次请求返回的都是一个独立完成的网页, 更利于SEO</p>
+<p><strong>最大缺点:</strong>网络传输数据量大</p>
+<h4 id="预渲染"><a href="#预渲染" class="headerlink" title="预渲染"></a>预渲染</h4><p>无需服务器实时动态编译，采用预渲染，在构建时针对特定路由简单的生成静态HTML文件</p>
+<p>本质就是客户端渲染, 只不过和SPA不同的是预渲染有多个界面</p>
+<h5 id="优缺点-2"><a href="#优缺点-2" class="headerlink" title="优缺点"></a>优缺点</h5><p><strong>最大优点:</strong> 由于有多个界面, 所以更利于SEO</p>
+<p><strong>最大缺点:</strong> 首屏加载慢, 预编译会非常的慢</p>
+<h4 id="如何选择"><a href="#如何选择" class="headerlink" title="如何选择"></a>如何选择</h4><ol>
+<li><p>注重SEO的新闻、电商网站，建议采用服务器端渲染</p>
+</li>
+<li><p>强交互的页面，不注重SEO，采用客户端渲染</p>
+</li>
+<li><p>两者之间, 只需改善少数页面的SEO，采用预渲染</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
     <link itemprop="mainEntityOfPage" href="https://nini-hub.github.io/2020/11/11/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB+%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E7%AB%AF%E5%BC%80%E5%8F%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -841,7 +991,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">المقالات</span>
         </a>
       </div>
